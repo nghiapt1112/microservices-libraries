@@ -7,22 +7,11 @@ buildscript {
 }
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-web')
-    compile('org.springframework.boot:spring-boot-starter-data-mongodb')
-    compile('org.springframework.boot:spring-boot-starter-amqp')
-    compile('org.springframework.cloud:spring-cloud-commons')
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.springframework.boot:spring-boot-starter-amqp')
+    implementation('org.springframework.cloud:spring-cloud-commons:2.1.0.M1')
 
-    compile('javax.validation:validation-api:2.0.1.Final')
-
-    testCompile('org.springframework.boot:spring-boot-starter-test')
-//    testCompile('org.springframework.boot:spring-boot-starter-test:2.0.2.RELEASE')
-//    testCompile('io.projectreactor:reactor-test:3.1.7.RELEASE')
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-    }
+    implementation('javax.validation:validation-api:2.0.1.Final')
 }
 
 jar {

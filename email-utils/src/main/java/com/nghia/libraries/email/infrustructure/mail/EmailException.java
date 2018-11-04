@@ -1,6 +1,6 @@
 package com.nghia.libraries.email.infrustructure.mail;
 
-import com.nghia.libraries.email.infrustructure.exception.DomainException;
+import com.nghia.libraries.commons.mss.infrustructure.exception.DomainException;
 
 public class EmailException extends DomainException {
     private static final int DOMAIN_CODE = 7;
