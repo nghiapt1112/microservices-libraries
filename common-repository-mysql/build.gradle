@@ -1,7 +1,7 @@
 buildscript {
     ext {
         groupName = 'com.nghia.tut.utils'
-        artifact = 'nghia-repository-mongo'
+        artifact = 'nghia-repository-mysql'
         nghiaVersion = 'RC1'
     }
 }
