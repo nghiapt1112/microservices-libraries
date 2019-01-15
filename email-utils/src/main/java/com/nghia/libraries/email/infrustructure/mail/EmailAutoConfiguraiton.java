@@ -42,13 +42,13 @@ public class EmailAutoConfiguraiton {
 
         return mailSender;
     }
-
-    @Bean
-    public TaskExecutor getTaskExecutor() {
-        ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
-        taskExecutor.setCorePoolSize(5);
-        taskExecutor.setMaxPoolSize(10);
-        taskExecutor.setWaitForTasksToCompleteOnShutdown(true);
-        return taskExecutor;
-    }
+//
+//    @Bean
+//    public TaskExecutor getTaskExecutor() {
+//        ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
+//        taskExecutor.setCorePoolSize(5);
+//        taskExecutor.setMaxPoolSize(10);
+//        taskExecutor.setWaitForTasksToCompleteOnShutdown(true);
+//        return taskExecutor;
+//    }
 }
