@@ -1,3 +1,9 @@
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
 buildscript {
     ext {
         groupName = 'com.nghia.tut.utils'
@@ -7,6 +13,8 @@ buildscript {
 }
 
 dependencies {
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
     implementation('org.springframework.boot:spring-boot-starter-web')
     implementation('org.springframework.boot:spring-boot-starter-amqp')
     implementation('org.springframework.cloud:spring-cloud-commons:2.1.0.M1')

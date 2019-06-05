@@ -1,6 +1,6 @@
 package com.nghia.libraries.commons.mss.infrustructure.exception;
 
-
+@Deprecated
 public class DomainException extends RuntimeException {
     public static final int GENERAL_ERROR = 500;
     private static final long serialVersionUID = 5262974602102886958L;
