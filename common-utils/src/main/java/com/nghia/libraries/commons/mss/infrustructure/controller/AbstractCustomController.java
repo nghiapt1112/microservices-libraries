@@ -1,18 +1,20 @@
 package com.nghia.libraries.commons.mss.infrustructure.controller;
 
 import com.nghia.libraries.commons.mss.infrustructure.domain.AbstractObject;
-import com.nghia.libraries.commons.mss.infrustructure.exception.DomainException;
+import com.nghia.libraries.commons.mss.infrustructure.domain.AbstractResponse;
 import com.nghia.libraries.commons.mss.infrustructure.validator.AbstractCustomValidator;
-import com.nghia.libraries.commons.mss.utils.JsonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
+
+import java.util.Objects;
+
+//import com.nghia.libraries.commons.mss.infrustructure.exception.DomainException;
 
 
 // Target all Controllers annotated with @RestController
@@ -31,9 +33,14 @@ public class AbstractCustomController {
     @Autowired
     Environment env;
 
-
     @Autowired
     private AbstractCustomValidator abstractCustomValidator;
+
+//    @ExceptionHandler
+//    public ResponseEntity<String> handle(DomainException ex) {
+//        CONTROLLER_LOGGER.info("exception: exCode {}, exMessage {}", ex.getCode(), ex.getErrorResponse());
+//        return ResponseEntity.status(500).body(JsonUtils.toJson(ex.getErrorResponse()));
+//    }
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -49,10 +56,30 @@ public class AbstractCustomController {
 
     }
 
-
-    @ExceptionHandler
-    public ResponseEntity<String> handle(DomainException ex) {
-        CONTROLLER_LOGGER.info("exception: exCode {}, exMessage {}", ex.getCode(), ex.getErrorResponse());
-        return ResponseEntity.status(500).body(JsonUtils.toJson(ex.getErrorResponse()));
+    @ExceptionHandler(Exception.class)
+    public AbstractResponse handleRootExeption(Exception ex) {
+        return AbstractResponse.builder()
+                .code("[baseController] exception handler")
+                .message(ex.getMessage())
+                .body(null)
+                .build();
     }
+
+    private String getStr(String key) {
+        String value = this.env.getProperty(key);
+        if (Objects.isNull(value)) {
+            return key;
+        }
+        return value;
+    }
+
+    @ExceptionHandler(DomainException.class)
+    public AbstractResponse handleDomainException(DomainException ex) {
+        return AbstractResponse.builder()
+                .code(getStr(ex.getCode()))
+                .message(getStr(ex.getMessage()))
+                .body(null)
+                .build();
+    }
+
 }
